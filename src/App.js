@@ -3,27 +3,38 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
-  render() {
-    const todoListItems = [
+  state={//constructor
+    todoListItems :[//JSON
       {
         id: 1,
-        name: "Eat",
+        name: 'shoe'
       },
       {
-        id: 1,
-        name: "play",
+        id: 2,
+        name: 'dress'
       },
       {
-        id: 1,
-        name: "Sleep",
+        id: 3,
+        name: 'rest'
       }
     ]
+  }
+
+  deleteItem = (itemToDelete) => {
+    this.state.todoListItems=this.state.todoListItems.filter(item=>item.id!=itemToDelete.id); //use filter to delete
+    this.setState({ todotodoListItems: this.state.todoListItems });//re-set state
+  }
+
+  render() {
     return (
-      <div className="App">
+      <div className='App'>
         <ul>
           {
-            todoListItems.map(item => {
-              return <li> {item.name} </li>
+            this.state.todoListItems.map(item => {
+              return <li key={item.id}>
+                id:{item.id}--{item.name}
+                <button onClick={()=>this.deleteItem(item)}>delete</button>
+              </li>
             })
           }
         </ul>
